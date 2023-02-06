@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Session;
 class AuthController extends Controller
 {
     public function register(){
@@ -42,6 +43,25 @@ class AuthController extends Controller
         return view('admin.pages.login');
     }
     public function userLogin(Request $req){
-
+        $email = $req->email;
+        $password = $req->password;
+        // SELECT * from users WHERE email='anik@gmail.com' AND password='';
+        $user = User::where('email','=',$email)
+             ->where('password','=',md5($password))
+             ->first();
+        if($user){
+            if($user->is_approved==1){
+                Session::put('username',$user->name);
+                Session::put('userrole',$user->role);
+                return redirect('admin/dashboard');
+            }
+            else{
+                return redirect()->back()->with('info', 'Not Approved yet.');
+            }
+            
+        }
+        else{
+            return redirect()->back()->with('info', 'Invalid email or password');
+        }
     }
 }
