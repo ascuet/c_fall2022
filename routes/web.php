@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LayoutController;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,3 +42,8 @@ Route::get('admin/dashboard', [LayoutController::class, 'dashboard']);
 Route::get('admin/form', [LayoutController::class, 'forms']);
 
 Route::get('admin/tables', [LayoutController::class, 'tables']);
+
+Route::get('admin/register',[AuthController::class, 'register']);
+Route::post('admin/create-user',[AuthController::class, 'createUser']);
+Route::get('admin/login',[AuthController::class, 'login']);
+Route::post('admin/user-login',[AuthController::class, 'userLogin']);
