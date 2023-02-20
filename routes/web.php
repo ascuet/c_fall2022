@@ -54,4 +54,14 @@ Route::post('admin/user-login',[AuthController::class, 'userLogin']);
 Route::middleware(['CheckLoggedIn'])->group(function () {
     Route::get('admin/users',[UserController::class, 'allUsers']);
     Route::get('admin/approve/{userId}', [UserController::class, 'approve']);
+    Route::middleware(['IsStudent'])->group(function () {
+       Route::get('admin/my-courses', function(){
+            return 'you are student';
+       });
+    });
+    Route::middleware(['IsTeacher'])->group(function () {
+        Route::get('admin/give-marks', function(){
+            return 'you are teacher';
+       });
+    });
 });

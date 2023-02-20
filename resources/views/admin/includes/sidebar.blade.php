@@ -22,6 +22,20 @@
       </li>
     </ul>
   </li><!-- End Tables Nav -->
+  @if(Session::has('userrole') && Session::get('userrole')=='Student')
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-layout-text-window-reverse"></i><span>Courses</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <li>
+        <a href="{{ url('admin/my-courses') }}">
+          <i class="bi bi-circle"></i><span>My Courses</span>
+        </a>
+      </li>
+    </ul>
+  </li><!-- End Tables Nav -->
+  @endif
 
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
