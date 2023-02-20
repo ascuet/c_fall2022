@@ -49,4 +49,8 @@ Route::post('admin/create-user',[AuthController::class, 'createUser']);
 Route::get('admin/login',[AuthController::class, 'login']);
 Route::post('admin/user-login',[AuthController::class, 'userLogin']);
 
-Route::get('admin/users',[UserController::class, 'allUsers']);
+
+
+Route::middleware(['CheckLoggedIn'])->group(function () {
+    Route::get('admin/users',[UserController::class, 'allUsers']);
+});
