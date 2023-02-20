@@ -18,6 +18,11 @@
         <div class="col-lg-12">
 
           <div class="card">
+            @if(Session::has('msg'))
+            <div class="alert alert-success">
+              <strong>{{ Session::get('msg') }}</strong> 
+            </div>
+            @endif
             <div class="card-body">
               <h5 class="card-title">Table with stripped rows</h5>
 
@@ -29,6 +34,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Role</th>
                     <th scope="col">Approved?</th>
+                    <th scope="col">Approve</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -38,6 +44,11 @@
                     <td>{{ $u->email }}</td>
                     <td>{{ $u->role }}</td>
                     <td>{{ $u->is_approved }}</td>
+                    <td>
+                      @if($u->is_approved==0)
+                      <a href="{{ url('admin/approve/'.$u->id) }}" class="btn btn-secondary">Approve</a>
+                      @endif
+                    </td>
                   </tr>
                   @endforeach
                   

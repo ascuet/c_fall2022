@@ -10,4 +10,11 @@ class UserController extends Controller
         $users = User::all();
         return view('admin.pages.users',compact('users'));
     }
+    public function approve($userId){
+        $user = User::find($userId);
+        $user->is_approved = 1;
+        if($user->save()){
+            return redirect()->back()->with('msg', 'Approved');
+        }
+    }
 }
