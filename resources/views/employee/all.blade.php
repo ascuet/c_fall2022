@@ -22,6 +22,7 @@
                     <th>Salary</th>
                     <th>Department</th>
                     <th>Gender</th>
+                    <th>Image</th>
                     <th>Status</th>
                     <th>Address</th>
                     <th>Action</th>
@@ -36,6 +37,9 @@
                     <td>{{ $e->salary }}</td>
                     <td>{{ $e->department }}</td>
                     <td>{{ $e->gender }}</td>
+                    <td>
+                        <img src="{{ asset('thumbnail/'.$e->profile_pic) }}" alt="">
+                    </td>
                     <td>
                         @if($e->status==1)
                         <span class="badge badge-success">Active</span>

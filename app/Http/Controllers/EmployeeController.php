@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use DB;
+use Image;
 class EmployeeController extends Controller
 {
     public function create(){
@@ -32,6 +33,22 @@ class EmployeeController extends Controller
         } */
         // Eloquent ORM
 
+        // image
+        $originalImage = $req->file('profile_pic');
+        $thumbnailImage = Image::make($originalImage);
+        $thumbnailPath = public_path().'/thumbnail/';
+        $originalPath = public_path().'/images/';
+        $full_name = $originalImage->getClientOriginalName();
+        $full_name_arr = explode(".", $full_name); // abcd.png.jpg [0]=>abcd,[1]=>png [2]     
+        $len = sizeof($full_name_arr);
+        $extension = $full_name_arr[$len-1];
+        $filename = time().'.'.$extension;
+        $thumbnailImage->save($originalPath.$filename);
+
+        $thumbnailImage->resize(100,100);
+        $thumbnailImage->save($thumbnailPath.$filename); 
+        // image
+
         // Query Builder
         DB::table('employees')->insert([
             'name' => $req->name,
@@ -41,6 +58,7 @@ class EmployeeController extends Controller
             'department' => $req->department,
             'gender' => $req->gender,
             'address' => $req->address,
+            'profile_pic'=>$filename,
             'status' => $status
         ]);
         echo 'Successfully Inserted';

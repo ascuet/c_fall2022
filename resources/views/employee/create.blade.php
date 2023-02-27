@@ -14,7 +14,7 @@
 <body>
        <div class="container">
             <h2>YOUR HEADING HERE</h2>
-            <form action="{{ url('store-employee') }}" method="post">
+            <form action="{{ url('store-employee') }}" enctype="multipart/form-data" method="post">
                 @csrf
                 <div class="form-group">
                     <label for="">Name</label>
@@ -71,7 +71,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="form-control" value="Save">
+                    <label for="">Upload Image</label>
+                    <input type="file" class="form-control" name="profile_pic">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Save">
                 </div>
             </form>
         </div>

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('gender', 20);
             $table->mediumText('address');
             $table->boolean('status');
+            $table->string('profile_pic');
             $table->timestamps();
         });
     }
