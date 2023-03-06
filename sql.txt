@@ -1,0 +1,14 @@
+INSERT INTO divisions(name)
+VALUES 
+('Dhaka'),
+('Chattogram'),
+('Sylhet');
+
+INSERT INTO districts(name, division_id)
+VALUES 
+('Narayanganj', 1),
+('Gazipur', 1),
+('Rangamati', 2),
+('Bandarban', 2),
+('Sunamganj', 3),
+('Habiganj', 3);

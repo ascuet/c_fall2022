@@ -38,6 +38,7 @@ class EmployeeController extends Controller
         $thumbnailImage = Image::make($originalImage);
         $thumbnailPath = public_path().'/thumbnail/';
         $originalPath = public_path().'/images/';
+        
         $full_name = $originalImage->getClientOriginalName();
         $full_name_arr = explode(".", $full_name); // abcd.png.jpg [0]=>abcd,[1]=>png [2]     
         $len = sizeof($full_name_arr);

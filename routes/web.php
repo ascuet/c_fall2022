@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LayoutController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TeacherController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,3 +66,5 @@ Route::middleware(['CheckLoggedIn'])->group(function () {
        });
     });
 });
+
+Route::get('create-teacher',[TeacherController::class, 'create']);
