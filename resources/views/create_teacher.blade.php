@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <h2>Create Teacher</h2>
-        <form action="">
+        <form action="" id="myform">
             <div class="form-group">
                 <label for="">Division</label>
                 <select name="division" class="form-control" id="division">
@@ -27,6 +27,7 @@
                 <label for="">District</label>
                 <select name="district" class="form-control" id="district">
                     <option value="">SELECT DISTRICT</option>
+                    
                 </select>
             </div>
             <div class="form-group">
@@ -38,5 +39,46 @@
             </div>
         </form>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#division").change(function(){
+                var divisionId = $(this).val();
+                $("#district").empty();
+                $.ajax({
+                    url: 'http://127.0.0.1:8000/api/districts/'+divisionId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response){
+                        var districts = response.districts;
+                        var len = districts.length;
+                        str = '<option value="">SELECT DISTRICT</option>';
+                        for(var i=0; i < len; i++){
+                            str += '<option value="'+districts[i].id+'">'+districts[i].name+'</option>'
+                        }
+                        $("#district").append(str);
+                    }
+                });
+            });
+
+            $("#submit").click(function(e){
+                e.preventDefault();
+                $.ajax({
+                    url: 'http://127.0.0.1:8000/api/insert-teacher',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        teacher_division: $("#division").val(),
+                        teacher_district: $("#district").val(),
+                        teacher_name: $("#name").val()
+                    },
+                    success: function(res){
+                        alert(res.msg)
+                        $("#myform")[0].reset();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
